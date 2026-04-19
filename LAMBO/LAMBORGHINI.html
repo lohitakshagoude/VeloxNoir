@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Lamborghini â€” Velox Noir</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>* { box-sizing: border-box; margin: 0; padding: 0; } body { background: #000; color: #d4af37; font-family: 'Cormorant Garamond', serif; } header { background: #000; padding: 20px 40px; border-bottom: 2px solid #d4af37; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; } .logo { height: 65px; object-fit: contain; transition: 0.4s ease; } .logo:hover { transform: scale(1.05); } .nav-search-wrap { display: flex; align-items: center; } .search-container { display: flex; align-items: center; background: #0d0d0d; border: 1px solid #d4af37; border-radius: 30px; padding: 8px 16px; gap: 8px; transition: all 0.4s ease; width: 190px; } .search-container:focus-within { border-color: #f0d060; box-shadow: 0 0 12px rgba(212,175,55,0.3); width: 230px; } .search-icon { color: #d4af37; font-size: 14px; flex-shrink: 0; } #searchInput { background: transparent; border: none; outline: none; color: #d4af37; font-family: 'Cormorant Garamond', serif; font-size: 15px; width: 100%; letter-spacing: 1px; } #searchInput::placeholder { color: #5a4a1a; font-style: italic; } .nav-buttons { display: flex; align-items: center; } .nav-buttons a { background: #d4af37; color: #000; padding: 10px 22px; margin-left: 12px; border-radius: 30px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; transition: 0.35s ease; } .nav-buttons a:hover { background: #fff; transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 18px rgba(212,175,55,0.6); } .car-block { display: flex; align-items: center; gap: 0; padding: 40px 50px; border-bottom: 1px solid rgba(212,175,55,0.3); opacity: 0; transform: translateY(50px); transition: opacity 0.7s ease, transform 0.7s ease, background 0.4s ease; } .car-block.visible { opacity: 1; transform: translateY(0); } .car-block:nth-child(even) { flex-direction: row-reverse; } .car-block:hover { background: #060600; } .car-block.hidden-car { display: none !important; } .car-image { position: relative; width: 440px; height: 240px; border: 1px solid #d4af37; border-right: none; border-radius: 10px 0 0 10px; background: #000; overflow: hidden; flex-shrink: 0; } .car-image::after { content: ""; position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(to right, transparent, rgba(0,0,0,0.85)); pointer-events: none; } .car-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; } .car-block:hover .car-image img { transform: scale(1.07); } .car-block:nth-child(even) .car-image { border-left: none; border-right: 1px solid #d4af37; border-radius: 0 10px 10px 0; } .car-block:nth-child(even) .car-image::after { left: 0; right: auto; background: linear-gradient(to right, rgba(0,0,0,0.85), transparent); } .car-details { flex: 1; height: 240px; border: 1px solid #d4af37; border-left: none; border-radius: 0 10px 10px 0; background: #000; position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; } .car-block:nth-child(even) .car-details { border-right: none; border-left: 1px solid #d4af37; border-radius: 10px 0 0 10px; } .car-title { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 600; letter-spacing: 5px; text-align: center; padding: 0 20px; background: linear-gradient(90deg, #ffffff, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.4s ease; } .car-title:hover { letter-spacing: 8px; } .action-buttons { display: flex; gap: 14px; } .buy-btn { background: #d4af37; color: #000; border: none; padding: 10px 28px; border-radius: 25px; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; transition: 0.3s ease; } .buy-btn:hover { background: #fff; transform: scale(1.05); box-shadow: 0 6px 18px rgba(212,175,55,0.6); } .inspect-btn { background: transparent; color: #d4af37; border: 1px solid #d4af37; padding: 10px 28px; border-radius: 25px; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; transition: 0.3s ease; } .inspect-btn:hover { background: #d4af37; color: #000; transform: scale(1.05); }
+.checkout-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 32px; background: radial-gradient(circle at top, rgba(212,175,55,0.12), transparent 30%), rgba(0,0,0,0.97); z-index: 10000; } .checkout-panel { width: min(980px, 100%); border: 1px solid rgba(212,175,55,0.45); border-radius: 28px; background: linear-gradient(145deg, rgba(14,14,14,0.98), rgba(0,0,0,0.98)); box-shadow: 0 0 40px rgba(212,175,55,0.12); overflow: hidden; position: relative; } .checkout-panel::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at top right, rgba(212,175,55,0.08), transparent 35%); } .checkout-layout { display: grid; grid-template-columns: 1fr 1.15fr; min-height: 620px; } .checkout-summary { padding: 42px 34px; border-right: 1px solid rgba(212,175,55,0.18); background: linear-gradient(180deg, rgba(212,175,55,0.08), transparent 30%), rgba(8,8,8,0.94); position: relative; } .checkout-kicker, .payment-kicker { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 5px; color: #7d6520; text-transform: uppercase; } .checkout-car-name { margin-top: 18px; font-family: 'Cinzel Decorative', serif; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; color: #d4af37; } .checkout-price { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(212,175,55,0.25); font-family: 'Cinzel', serif; font-size: clamp(24px, 2.2vw, 32px); letter-spacing: 2px; color: #f0d77d; } .checkout-specs { margin-top: 28px; display: grid; gap: 18px; } .checkout-spec span { display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: #725d21; text-transform: uppercase; margin-bottom: 6px; } .checkout-spec strong { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #f0df9f; } .checkout-form-wrap { padding: 42px 34px; position: relative; } .checkout-form-wrap h3 { margin-top: 14px; font-family: 'Cinzel', serif; font-size: 26px; letter-spacing: 3px; color: #d4af37; } .payment-note { margin-top: 10px; font-size: 18px; color: #bfa861; } .checkout-form { margin-top: 28px; display: grid; gap: 18px; } .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; } .checkout-field label { display: block; margin-bottom: 8px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: #7d6520; text-transform: uppercase; } .checkout-field input { width: 100%; padding: 14px 16px; border: 1px solid rgba(212,175,55,0.28); border-radius: 14px; background: rgba(0,0,0,0.8); color: #f4e4a7; font-size: 18px; } .checkout-field input:focus { border-color: #d4af37; box-shadow: 0 0 18px rgba(212,175,55,0.14); transform: none; } .checkout-field input.error-field { border-color: #b72f2f; box-shadow: 0 0 0 1px rgba(183,47,47,0.2); } .checkout-actions { margin-top: 10px; display: flex; gap: 14px; } .checkout-cancel, .checkout-proceed { flex: 1; padding: 14px 18px; border-radius: 999px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; transition: 0.3s ease; } .checkout-cancel { background: transparent; border: 1px solid rgba(212,175,55,0.45); color: #d4af37; } .checkout-cancel:hover { background: rgba(212,175,55,0.08); } .checkout-proceed { border: none; background: #d4af37; color: #000; } .checkout-proceed:hover { background: #fff3ca; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.24); } .checkout-close { position: absolute; top: 20px; right: 22px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.35); background: transparent; color: #d4af37; font-size: 22px; z-index: 2; } .checkout-status { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; background: rgba(0,0,0,0.96); z-index: 3; } .checkout-status.active { display: flex; } .status-stage { display: none; flex-direction: column; align-items: center; justify-content: center; } .status-stage.active { display: flex; } .loader-ring { width: 112px; height: 112px; border-radius: 50%; border: 3px solid rgba(212,175,55,0.15); border-top-color: #d4af37; border-right-color: #f0d77d; animation: checkoutSpin 1s linear infinite; box-shadow: 0 0 24px rgba(212,175,55,0.2); } .status-text { margin-top: 24px; font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 5px; color: #d4af37; } .status-subtext { margin-top: 10px; font-size: 18px; color: #bfa861; } .success-badge { width: 120px; height: 120px; border-radius: 50%; border: 2px solid rgba(212,175,55,0.65); display: grid; place-items: center; box-shadow: 0 0 28px rgba(212,175,55,0.22), inset 0 0 18px rgba(212,175,55,0.08); } .success-badge::before { content: ""; width: 28px; height: 56px; border-right: 5px solid #d4af37; border-bottom: 5px solid #d4af37; transform: rotate(45deg) translate(-6px, -2px); } @keyframes checkoutSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } @media (max-width: 900px) { .checkout-layout { grid-template-columns: 1fr; } .checkout-summary { border-right: none; border-bottom: 1px solid rgba(212,175,55,0.18); } } @media (max-width: 640px) { .checkout-overlay { padding: 16px; } .checkout-summary, .checkout-form-wrap { padding: 28px 20px; } .checkout-grid, .checkout-actions { grid-template-columns: 1fr; flex-direction: column; } } .inspect-viewer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); display: none; align-items: center; justify-content: center; z-index: 9999; overflow: hidden; } .inspect-viewer img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.5; } .inspect-viewer::after { content: ""; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(to left, rgba(0,0,0,0.97) 40%, transparent); z-index: 2; } .inspect-info { position: absolute; right: 80px; top: 50%; transform: translateY(-50%) translateX(60px); color: #d4af37; opacity: 0; animation: slideText 0.7s forwards ease; animation-delay: 0.2s; z-index: 3; min-width: 290px; } @keyframes slideText { to { opacity: 1; transform: translateY(-50%) translateX(0); } } .inspect-brand-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 6px; color: #5a4a1a; margin-bottom: 10px; } .inspect-name { font-family: 'Cinzel Decorative', serif; font-size: 21px; font-weight: 700; letter-spacing: 2px; color: #d4af37; } .inspect-divider { width: 60px; height: 1px; background: linear-gradient(to right, #d4af37, transparent); margin: 16px 0; } .inspect-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; color: #5a4a1a; margin-top: 14px; margin-bottom: 3px; text-transform: uppercase; } .inspect-value { font-family: 'Cormorant Garamond', serif; font-size: 19px; letter-spacing: 1px; color: #e8c96a; font-weight: 600; } .inspect-price { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 2px; color: #d4af37; margin-top: 22px; border-top: 1px solid rgba(212,175,55,0.3); padding-top: 16px; } .close-btn { position: absolute; top: 30px; right: 40px; font-size: 28px; color: #d4af37; z-index: 10; transition: 0.3s ease; font-family: 'Cinzel', serif; } .close-btn:hover { transform: scale(1.2) rotate(90deg); }.models-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;justify-content:center;align-items:flex-start;padding-top:60px;z-index:99999;overflow-y:auto;}.models-table{width:85%;border-collapse:collapse;font-family:'Cinzel',serif;color:#d4af37;margin:0 auto 60px;}.models-table th{border-bottom:2px solid #d4af37;padding:18px;letter-spacing:2px;font-size:12px;}.models-table td{border-bottom:1px solid rgba(212,175,55,0.3);padding:16px;text-align:center;opacity:0;transform:translateY(25px);font-family:'Cormorant Garamond',serif;font-size:16px;}.models-table tr.show td{opacity:1;transform:translateY(0);transition:0.6s ease;}</style>
+<style>
+.compare-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:32px;background:radial-gradient(circle at top,rgba(212,175,55,0.14),transparent 32%),rgba(0,0,0,0.97);z-index:12000}.compare-panel{width:min(980px,100%);border:1px solid rgba(212,175,55,0.45);border-radius:26px;background:linear-gradient(145deg,rgba(14,14,14,0.98),rgba(0,0,0,0.98));box-shadow:0 0 42px rgba(212,175,55,0.16);position:relative;overflow:hidden;padding:34px}.compare-close{position:absolute;top:18px;right:22px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(212,175,55,0.4);background:transparent;color:#d4af37;font-size:22px;cursor:pointer}.compare-kicker{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#7d6520}.compare-title{margin:14px 0 24px;font-family:'Cinzel Decorative',serif;font-size:clamp(28px,4vw,44px);color:#d4af37}.compare-selects{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}.compare-field label{display:block;margin-bottom:8px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#7d6520}.compare-field select{width:100%;padding:13px 16px;border:1px solid rgba(212,175,55,0.35);border-radius:14px;background:#050505;color:#f0df9f;font-family:'Cormorant Garamond',serif;font-size:18px;outline:none}.compare-results{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare-card{border:1px solid rgba(212,175,55,0.24);border-radius:20px;background:rgba(0,0,0,0.55);padding:24px}.compare-car-name{font-family:'Cinzel',serif;font-size:20px;letter-spacing:3px;color:#f0d77d;margin-bottom:18px}.compare-row{padding:13px 0;border-top:1px solid rgba(212,175,55,0.16)}.compare-row span{display:block;font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#725d21;margin-bottom:5px}.compare-row strong{font-family:'Cormorant Garamond',serif;font-size:19px;color:#f0df9f}@media(max-width:720px){.compare-overlay{padding:16px}.compare-panel{padding:28px 18px}.compare-selects,.compare-results{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav-search-wrap"><div class="search-container"><span class="search-icon">&#9906;</span><input type="text" id="searchInput" placeholder="Search modelsâ€¦" oninput="filterCars(this.value)" /></div></div>
+  <img src="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\LAMBO.png" class="logo">
+  <div class="nav-buttons"><a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\car.html">Home</a><a href="#" onclick="openModelsTable();return false;">Models</a><a href="#" onclick="openCompare();return false;">Compare</a><a href="https://www.lamborghini.com/" target="_blank" rel="noopener noreferrer">Contact</a></div>
+</header>
+<section class="car-block" data-name="veneno"><div class="car-image"><img src="Veneno.jpg"></div><div class="car-details"><h2 class="car-title">V E N E N O</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Veneno" data-engine="6.5L Naturally Aspirated V12" data-power="750 HP" data-topspeed="355 km/h" data-price="â‚¹ 35 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="sian fkp 37"><div class="car-image"><img src="Sian.jpg"></div><div class="car-details"><h2 class="car-title">SIAN FKP 37</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="SiÃ¡n FKP 37" data-engine="6.5L V12 + Supercapacitor Hybrid" data-power="819 HP" data-topspeed="350 km/h" data-price="â‚¹ 25 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="revuelto"><div class="car-image"><img src="Rev.jpg"></div><div class="car-details"><h2 class="car-title">R E V U E L T O</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Revuelto" data-engine="6.5L V12 + 3 Electric Motors" data-power="1,001 HP" data-topspeed="350 km/h" data-price="â‚¹ 8.5 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="centenario"><div class="car-image"><img src="Cente.jpg"></div><div class="car-details"><h2 class="car-title">C E N T E N A R I O</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Centenario" data-engine="6.5L Naturally Aspirated V12" data-power="759 HP" data-topspeed="350 km/h" data-price="â‚¹ 22 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="aventador svj roadster"><div class="car-image"><img src="Aventador svj.jpg"></div><div class="car-details"><h2 class="car-title">AVENTADOR SVJ ROADSTER</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Aventador SVJ Roadster" data-engine="6.5L Naturally Aspirated V12" data-power="759 HP" data-topspeed="350 km/h" data-price="â‚¹ 8 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="huracan sto"><div class="car-image"><img src="Huracane.jpeg"></div><div class="car-details"><h2 class="car-title">HURACAN STO</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="HuracÃ¡n STO" data-engine="5.2L Naturally Aspirated V10" data-power="631 HP" data-topspeed="310 km/h" data-price="â‚¹ 4.5 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="urus performante"><div class="car-image"><img src="Urus.jpg"></div><div class="car-details"><h2 class="car-title">URUS PERFORMANTE</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Urus Performante" data-engine="4.0L Twin-Turbo V8" data-power="657 HP" data-topspeed="306 km/h" data-price="â‚¹ 4.2 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="diablo vt"><div class="car-image"><img src="Diablo.jpg"></div><div class="car-details"><h2 class="car-title">D I A B L O V T</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Diablo VT" data-engine="5.7L Naturally Aspirated V12" data-power="492 HP" data-topspeed="325 km/h" data-price="â‚¹ 3.5 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="murcielago super veloce"><div class="car-image"><img src="Murcielago.jpg"></div><div class="car-details"><h2 class="car-title">MURCIELAGO SUPER VELOCE</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="MurciÃ©lago Super Veloce" data-engine="6.5L Naturally Aspirated V12" data-power="670 HP" data-topspeed="342 km/h" data-price="â‚¹ 5.5 Crore">Inspect</button></div></div></section>
+<section class="car-block" data-name="countach lpi 800-4"><div class="car-image"><img src="Countach.jpg"></div><div class="car-details"><h2 class="car-title">COUNTACH LPI 800-4</h2><div class="action-buttons"><button class="buy-btn">Buy</button><button class="inspect-btn" onclick="openInspect(this)" data-name="Countach LPI 800-4" data-engine="6.5L V12 + Supercapacitor Hybrid" data-power="803 HP" data-topspeed="355 km/h" data-price="â‚¹ 22 Crore">Inspect</button></div></div></section>
+<div id="checkoutOverlay" class="checkout-overlay" aria-hidden="true">
+<div class="checkout-panel" role="dialog" aria-modal="true" aria-labelledby="checkoutCarName">
+<button class="checkout-close" id="closeCheckoutBtn" aria-label="Close checkout">X</button>
+<div class="checkout-layout">
+<div class="checkout-summary">
+<div class="checkout-kicker">Velox Noir Secure Purchase</div>
+<div class="checkout-car-name" id="checkoutCarName">LAMBORGHINI</div>
+<div class="checkout-price" id="checkoutPrice">Rs. 0</div>
+<div class="checkout-specs">
+<div class="checkout-spec"><span>Engine</span><strong id="checkoutEngine">-</strong></div>
+<div class="checkout-spec"><span>Power Output</span><strong id="checkoutPower">-</strong></div>
+<div class="checkout-spec"><span>Top Speed</span><strong id="checkoutSpeed">-</strong></div>
+</div>
+</div>
+<div class="checkout-form-wrap">
+<div class="payment-kicker">Private Client Checkout</div>
+<h3>Complete your acquisition</h3>
+<p class="payment-note">Enter your card details to reserve this vehicle instantly.</p>
+<div class="checkout-form" id="checkoutForm">
+<div class="checkout-field"><label for="cardName">Cardholder Name</label><input type="text" id="cardName" placeholder="James Bond"></div>
+<div class="checkout-field"><label for="cardNumber">Card Number</label><input type="text" id="cardNumber" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456"></div>
+<div class="checkout-grid">
+<div class="checkout-field"><label for="cardExpiry">Expiry Date</label><input type="text" id="cardExpiry" inputmode="numeric" maxlength="5" placeholder="MM/YY"></div>
+<div class="checkout-field"><label for="cardCvv">CVV</label><input type="password" id="cardCvv" inputmode="numeric" maxlength="4" placeholder="123"></div>
+</div>
+<div class="checkout-field"><label for="billingZip">Billing Zip / Postal Code</label><input type="text" id="billingZip" maxlength="10" placeholder="400001"></div>
+<div class="checkout-actions">
+<button type="button" class="checkout-cancel" id="cancelCheckoutBtn">Cancel</button>
+<button type="button" class="checkout-proceed" id="proceedCheckoutBtn">Proceed to Checkout</button>
+</div>
+</div>
+</div>
+</div>
+<div class="checkout-status" id="checkoutStatus">
+<div class="status-stage active" id="checkoutLoadingStage">
+<div class="loader-ring"></div>
+<div class="status-text">Processing Payment</div>
+<div class="status-subtext">Authenticating your secure gold transaction...</div>
+</div>
+<div class="status-stage" id="checkoutSuccessStage">
+<div class="success-badge"></div>
+<div class="status-text">Payment Successful</div>
+<div class="status-subtext" id="successMessage">Your Lamborghini has been reserved.</div>
+</div>
+</div>
+</div>
+</div>
+<div id="modelsOverlay" class="models-overlay"><span class="close-btn" onclick="closeModelsTable()" style="position:fixed;top:30px;right:40px;font-size:28px;color:#d4af37;z-index:10;transition:0.3s ease;font-family:'Cinzel',serif;">&#x2715;</span><table class="models-table"><thead><tr><th>Model</th><th>Horsepower</th><th>Engine</th><th>Top Speed</th><th>Price</th></tr></thead><tbody id="modelsTableBody"></tbody></table></div>
+<div id="inspectViewer" class="inspect-viewer"><span class="close-btn" onclick="closeInspect()">âœ•</span><img id="inspectImage" src=""><div class="inspect-info" id="inspectInfo"><p class="inspect-brand-label">LAMBORGHINI</p><div class="inspect-name" id="inspectName"></div><div class="inspect-divider"></div><p class="inspect-label">Engine</p><p class="inspect-value" id="inspectEngine"></p><p class="inspect-label">Power Output</p><p class="inspect-value" id="inspectPower"></p><p class="inspect-label">Top Speed</p><p class="inspect-value" id="inspectSpeed"></p><p class="inspect-price" id="inspectPrice"></p></div></div>
+<div id="compareOverlay" class="compare-overlay" aria-hidden="true"><div class="compare-panel" role="dialog" aria-modal="true" aria-labelledby="compareTitle"><button class="compare-close" type="button" onclick="closeCompare()" aria-label="Close compare">X</button><div class="compare-kicker">Velox Noir Comparator</div><h2 class="compare-title" id="compareTitle">Compare Models</h2><div class="compare-selects"><div class="compare-field"><label for="compareFirst">First Model</label><select id="compareFirst"></select></div><div class="compare-field"><label for="compareSecond">Second Model</label><select id="compareSecond"></select></div></div><div class="compare-results"><div class="compare-card" id="compareCardOne"></div><div class="compare-card" id="compareCardTwo"></div></div></div></div>
+<script>
+  const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 80); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+  document.querySelectorAll('.car-block').forEach(b => observer.observe(b));
+  const checkoutOverlay = document.getElementById('checkoutOverlay');
+  const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
+  const cancelCheckoutBtn = document.getElementById('cancelCheckoutBtn');
+  const proceedCheckoutBtn = document.getElementById('proceedCheckoutBtn');
+  const checkoutStatus = document.getElementById('checkoutStatus');
+  const checkoutLoadingStage = document.getElementById('checkoutLoadingStage');
+  const checkoutSuccessStage = document.getElementById('checkoutSuccessStage');
+  const checkoutFields = ['cardName', 'cardNumber', 'cardExpiry', 'cardCvv', 'billingZip'].map(id => document.getElementById(id));
+  let checkoutTimer = null;
+  let currentCheckoutCar = null;
+
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.textContent = 'CHECKOUT';
+    btn.addEventListener('click', () => openCheckout(btn));
+  });
+
+  document.getElementById('cardNumber').addEventListener('input', e => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+    e.target.classList.remove('error-field');
+  });
+
+  document.getElementById('cardExpiry').addEventListener('input', e => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.value = digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
+    e.target.classList.remove('error-field');
+  });
+
+  document.getElementById('cardCvv').addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.classList.remove('error-field');
+  });
+
+  document.getElementById('billingZip').addEventListener('input', e => {
+    e.target.classList.remove('error-field');
+  });
+
+  document.getElementById('cardName').addEventListener('input', e => {
+    e.target.classList.remove('error-field');
+  });
+  function filterCars(query) { const q = query.trim().toLowerCase(); document.querySelectorAll('.car-block').forEach(block => { const name = block.getAttribute('data-name') || ''; block.classList.toggle('hidden-car', q !== '' && !name.includes(q)); }); }
+  function getCheckoutData(button) {
+    const detailsButton = button.parentElement.querySelector('.inspect-btn');
+    return {
+      name: detailsButton.getAttribute('data-name'),
+      price: detailsButton.getAttribute('data-price').replace('â‚¹', 'Rs.'),
+      engine: detailsButton.getAttribute('data-engine'),
+      power: detailsButton.getAttribute('data-power'),
+      speed: detailsButton.getAttribute('data-topspeed')
+    };
+  }
+
+  function openCheckout(button) {
+    const car = getCheckoutData(button);
+    const carBlock = button.closest('.car-block');
+    const carImage = carBlock ? carBlock.querySelector('img') : null;
+    currentCheckoutCar = { ...car, brand: 'Lamborghini', image: carImage ? carImage.getAttribute('src') : '', page: window.location.href };
+    document.getElementById('checkoutCarName').textContent = car.name;
+    document.getElementById('checkoutPrice').textContent = car.price;
+    document.getElementById('checkoutEngine').textContent = car.engine;
+    document.getElementById('checkoutPower').textContent = car.power;
+    document.getElementById('checkoutSpeed').textContent = car.speed;
+    document.getElementById('successMessage').textContent = `${car.name} has been reserved under your Velox Noir profile.`;
+    resetCheckoutState();
+    checkoutOverlay.style.display = 'flex';
+    checkoutOverlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeCheckout() {
+    checkoutOverlay.style.display = 'none';
+    checkoutOverlay.setAttribute('aria-hidden', 'true');
+    currentCheckoutCar = null;
+    resetCheckoutState();
+  }
+
+  function resetCheckoutState() {
+    if (checkoutTimer) {
+      clearTimeout(checkoutTimer);
+      checkoutTimer = null;
+    }
+    checkoutFields.forEach(field => {
+      field.classList.remove('error-field');
+      field.disabled = false;
+      field.value = '';
+    });
+    proceedCheckoutBtn.disabled = false;
+    cancelCheckoutBtn.disabled = false;
+    closeCheckoutBtn.disabled = false;
+    checkoutStatus.classList.remove('active');
+    checkoutLoadingStage.classList.add('active');
+    checkoutSuccessStage.classList.remove('active');
+  }
+
+  function validateCheckout() {
+    const cardName = document.getElementById('cardName');
+    const cardNumber = document.getElementById('cardNumber');
+    const cardExpiry = document.getElementById('cardExpiry');
+    const cardCvv = document.getElementById('cardCvv');
+    const billingZip = document.getElementById('billingZip');
+    const validations = [
+      [cardName, cardName.value.trim().length >= 3],
+      [cardNumber, cardNumber.value.replace(/\s/g, '').length === 16],
+      [cardExpiry, /^\d{2}\/\d{2}$/.test(cardExpiry.value)],
+      [cardCvv, /^\d{3,4}$/.test(cardCvv.value)],
+      [billingZip, billingZip.value.trim().length >= 4]
+    ];
+    let isValid = true;
+    validations.forEach(([field, valid]) => {
+      field.classList.toggle('error-field', !valid);
+      if (!valid) isValid = false;
+    });
+    return isValid;
+  }
+
+  function processCheckout() {
+    if (!validateCheckout()) return;
+    checkoutFields.forEach(field => field.disabled = true);
+    proceedCheckoutBtn.disabled = true;
+    cancelCheckoutBtn.disabled = true;
+    closeCheckoutBtn.disabled = true;
+    checkoutStatus.classList.add('active');
+    checkoutLoadingStage.classList.add('active');
+    checkoutSuccessStage.classList.remove('active');
+    checkoutTimer = setTimeout(() => {
+      saveInventoryCar(currentCheckoutCar);
+      checkoutLoadingStage.classList.remove('active');
+      checkoutSuccessStage.classList.add('active');
+      closeCheckoutBtn.disabled = false;
+      checkoutTimer = setTimeout(() => {
+        closeCheckout();
+      }, 1800);
+    }, 1900);
+  }
+  function openInspect(btn) { const block = btn.closest('.car-block'); const img = block.querySelector('img'); document.getElementById('inspectImage').src = img.src; document.getElementById('inspectName').textContent = btn.getAttribute('data-name'); document.getElementById('inspectEngine').textContent = btn.getAttribute('data-engine'); document.getElementById('inspectPower').textContent = btn.getAttribute('data-power'); document.getElementById('inspectSpeed').textContent = btn.getAttribute('data-topspeed'); document.getElementById('inspectPrice').textContent = btn.getAttribute('data-price'); const info = document.getElementById('inspectInfo'); info.style.animation = 'none'; info.offsetHeight; info.style.animation = ''; document.getElementById('inspectViewer').style.display = 'flex'; }
+  function closeInspect() { document.getElementById('inspectViewer').style.display = 'none'; }
+function saveInventoryCar(car) { if (!car) return; const key = 'veloxNoirInventory'; let inventory = []; try { const raw = sessionStorage.getItem(key); const parsed = raw ? JSON.parse(raw) : []; inventory = Array.isArray(parsed) ? parsed : []; } catch (error) {} inventory.push({ name: car.name, brand: car.brand, image: car.image, page: car.page }); sessionStorage.setItem(key, JSON.stringify(inventory)); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeInspect(); closeCheckout(); } });
+
+const modelsData = [
+["Veneno","750 HP","6.5L NA V12","355 km/h","â‚¹ 35 Crore"],
+["SiÃ¡n FKP 37","819 HP","6.5L V12 + Hybrid","350 km/h","â‚¹ 25 Crore"],
+["Revuelto","1,001 HP","6.5L V12 + 3 Motors","350 km/h","â‚¹ 8.5 Crore"],
+["Centenario","759 HP","6.5L NA V12","350 km/h","â‚¹ 22 Crore"],
+["Aventador SVJ Roadster","759 HP","6.5L NA V12","350 km/h","â‚¹ 8 Crore"],
+["HuracÃ¡n STO","631 HP","5.2L NA V10","310 km/h","â‚¹ 4.5 Crore"],
+["Urus Performante","657 HP","4.0L Twin-Turbo V8","306 km/h","â‚¹ 4.2 Crore"],
+["Diablo VT","492 HP","5.7L NA V12","325 km/h","â‚¹ 3.5 Crore"],
+["MurciÃ©lago SV","670 HP","6.5L NA V12","342 km/h","â‚¹ 5.5 Crore"],
+["Countach LPI 800-4","803 HP","6.5L V12 + Hybrid","355 km/h","â‚¹ 22 Crore"]
+];
+function openModelsTable(){
+  const overlay=document.getElementById("modelsOverlay");
+  const body=document.getElementById("modelsTableBody");
+  body.innerHTML="";
+  modelsData.forEach((car,i)=>{
+    const row=document.createElement("tr");
+    car.forEach(data=>{const cell=document.createElement("td");cell.textContent=data;row.appendChild(cell);});
+    body.appendChild(row);
+    setTimeout(()=>{row.classList.add("show");},i*120);
+  });
+  overlay.style.display="flex";
+}
+function closeModelsTable(){
+  document.getElementById("modelsOverlay").style.display="none";
+}
+closeCheckoutBtn.addEventListener('click', closeCheckout);
+cancelCheckoutBtn.addEventListener('click', closeCheckout);
+proceedCheckoutBtn.addEventListener('click', processCheckout);
+checkoutOverlay.addEventListener('click', e => {
+  if (e.target === checkoutOverlay) closeCheckout();
+});
+function getCompareCars(){return Array.from(document.querySelectorAll('.car-block')).map(block=>{const btn=block.querySelector('.inspect-btn');const title=block.querySelector('.car-title');const clean=value=>(value||'').replace('â‚¹','Rs.').trim();return {name:clean(btn&&btn.getAttribute('data-name'))||clean(title&&title.textContent)||'Selected Model',engine:clean(btn&&btn.getAttribute('data-engine'))||'Bespoke luxury powertrain',power:clean(btn&&btn.getAttribute('data-power'))||'Private commission',speed:clean(btn&&btn.getAttribute('data-topspeed'))||'Reserved specification',price:clean(btn&&btn.getAttribute('data-price'))||'Price on request'};});}
+function fillCompareSelect(select,cars,selectedIndex){select.innerHTML='';cars.forEach((car,index)=>{const option=document.createElement('option');option.value=index;option.textContent=car.name;select.appendChild(option);});select.value=String(Math.min(selectedIndex,cars.length-1));}
+function renderCompareCard(card,car){card.innerHTML=`<div class="compare-car-name">${car.name}</div><div class="compare-row"><span>Engine</span><strong>${car.engine}</strong></div><div class="compare-row"><span>Power Output</span><strong>${car.power}</strong></div><div class="compare-row"><span>Top Speed</span><strong>${car.speed}</strong></div><div class="compare-row"><span>Price</span><strong>${car.price}</strong></div>`;}
+function updateCompare(){const cars=getCompareCars();if(!cars.length)return;renderCompareCard(document.getElementById('compareCardOne'),cars[Number(document.getElementById('compareFirst').value)||0]);renderCompareCard(document.getElementById('compareCardTwo'),cars[Number(document.getElementById('compareSecond').value)||0]);}
+function openCompare(){const overlay=document.getElementById('compareOverlay');const cars=getCompareCars();if(!overlay||!cars.length)return;fillCompareSelect(document.getElementById('compareFirst'),cars,0);fillCompareSelect(document.getElementById('compareSecond'),cars,Math.min(1,cars.length-1));updateCompare();overlay.style.display='flex';overlay.setAttribute('aria-hidden','false');}
+function closeCompare(){const overlay=document.getElementById('compareOverlay');if(!overlay)return;overlay.style.display='none';overlay.setAttribute('aria-hidden','true');}
+document.getElementById('compareFirst').addEventListener('change',updateCompare);document.getElementById('compareSecond').addEventListener('change',updateCompare);document.getElementById('compareOverlay').addEventListener('click',e=>{if(e.target.id==='compareOverlay')closeCompare();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCompare();});
+</script>
+</body>
+</html>
+
