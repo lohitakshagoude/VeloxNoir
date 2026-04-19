@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Velox Noir — Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box; 
+  margin: 0; padding: 0; }
+body { background: #000;
+   color: #d4af37;
+    font-family: 'Cormorant Garamond', serif; 
+    height: 100vh;
+     display: flex; 
+     align-items: center;
+     justify-content: center;
+     }
+.wrap { text-align: center; animation: fadeUp 0.8s ease forwards; opacity: 0; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+.title { font-family: 'Cinzel Decorative', serif; font-size: 30px; letter-spacing: 6px; color: #d4af37; margin-bottom: 6px; }
+.sub { font-style: italic; font-size: 13px; letter-spacing: 4px; color: #5a4a1a; margin-bottom: 36px; }
+
+.box { background: #0d0d0d; border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 40px 44px; width: 380px; transition: box-shadow 0.4s; }
+.box:hover { box-shadow: 0 0 30px rgba(212,175,55,0.12); }
+
+label { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; color: #5a4a1a; display: block; margin-bottom: 7px; text-align: left; transition: color 0.3s; }
+.field:focus-within label { color: #d4af37; }
+.field { margin-bottom: 18px; }
+
+input { width: 100%; padding: 11px 14px; background: #000; border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; color: #d4af37; font-family: 'Cormorant Garamond', serif; font-size: 16px; outline: none; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+input::placeholder { color: #2a2000; font-style: italic; }
+input:focus { border-color: #d4af37; box-shadow: 0 0 14px rgba(212,175,55,0.2); transform: scale(1.02); }
+input.error { border-color: #8b0000; animation: shake 0.4s ease; }
+@keyframes shake { 20%{transform:translateX(-5px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(3px)} }
+
+hr { border: none; border-top: 1px solid rgba(212,175,55,0.15); margin: 22px 0; }
+
+button { width: 100%; padding: 13px; background: #d4af37; color: #000; border: none; border-radius: 30px; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 4px; transition: all 0.3s; }
+button:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+
+.success { position: fixed; inset: 0; background: #000; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 10px; z-index: 9999; }
+.success.show { display: flex; animation: fadeUp 0.5s ease; }
+.success h2 { font-family: 'Cinzel Decorative', serif; font-size: 26px; letter-spacing: 6px; color: #d4af37; text-shadow: 0 0 40px rgba(212,175,55,0.6); }
+.success p { font-style: italic; font-size: 14px; letter-spacing: 3px; color: #5a4a1a; }
+</style>
+</head>
+<body>
+
+<div class="success" id="success">
+  <h2>WELCOME</h2>
+  <p>Entering the showroom…</p>
+</div>
+
+<div class="wrap">
+  <div class="title">VELOX NOIR</div>
+  <div class="sub">The Pinnacle of Automotive Prestige</div>
+  <div class="box">
+    <div class="field">
+      <label>Your Name</label>
+      <input type="text" id="name" placeholder="e.g. James Bond" />
+    </div>
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="e.g. james@veloxnoir.com" />
+    </div>
+    <hr>
+    <button onclick="login()">ENTER SHOWROOM</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+  ['name','email'].forEach(id => document.getElementById(id).addEventListener('input', () => document.getElementById(id).classList.remove('error')));
+
+  function login() {
+    const n = document.getElementById('name'), e = document.getElementById('email');
+    let ok = true;
+    if (!n.value.trim()) { n.classList.add('error'); ok = false; }
+    if (!e.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value)) { e.classList.add('error'); ok = false; }
+    if (!ok) return;
+    document.getElementById('success').classList.add('show');
+    setTimeout(() => window.location.href = 'car.html', 1800);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Lohith's Dealership</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family: 'Cormorant Garamond', serif;
+margin:0;
+background:#0a0a0a;
+color:#d4af37;
+}
+
+header{
+background: #000;
+color:#d4af37;
+padding: 38px 25px 30px;
+text-align:center;
+border-bottom:2px solid #d4af37;
+position: relative;
+overflow: hidden;
+}
+
+header::before {
+content: "";
+position: absolute;
+top: 0; left: 0; right: 0; bottom: 0;
+background: radial-gradient(ellipse at center, rgba(212,175,55,0.07) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.header-emblem {
+font-size: 11px;
+letter-spacing: 8px;
+color: #8a6f1e;
+font-family: 'Cinzel', serif;
+margin-bottom: 8px;
+text-transform: uppercase;
+}
+
+.header-title {
+font-family: 'Cinzel Decorative', serif;
+font-size: 36px;
+font-weight: 900;
+letter-spacing: 6px;
+color: #d4af37;
+line-height: 1.2;
+text-shadow: 0 0 40px rgba(212,175,55,0.3);
+transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
+cursor: default;
+}
+
+.header-title:hover {
+letter-spacing: 10px;
+text-shadow: 0 0 60px rgba(212,175,55,0.6), 0 0 20px rgba(212,175,55,0.4);
+}
+
+.header-subtitle {
+font-family: 'Cormorant Garamond', serif;
+font-size: 13px;
+font-style: italic;
+color: #8a6f1e;
+letter-spacing: 5px;
+margin-top: 8px;
+}
+html{
+  scroll-behavior: smooth;
+}
+.header-rule {
+width: 120px;
+height: 1px;
+background: linear-gradient(to right, transparent, #d4af37, transparent);
+margin: 14px auto 0;
+}
+
+nav{
+background:#000;
+padding:15px 25px;
+text-align:center;
+border-bottom:1px solid #d4af37;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 0;
+flex-wrap: wrap;
+position: relative;
+}
+
+.nav-links {
+display: flex;
+align-items: center;
+gap: 0;
+}
+
+nav a{
+color:#d4af37;
+margin: 0 25px;
+text-decoration:none;
+font-weight: 600;
+font-size: 14px;
+font-family: 'Cinzel', serif;
+letter-spacing: 2px;
+transition: all 0.4s ease;
+text-transform: uppercase;
+}
+
+nav a:hover{
+color:white;
+letter-spacing:4px;
+}
+
+.nav-search-wrap {
+position: absolute;
+right: 25px;
+top: 50%;
+transform: translateY(-50%);
+display: flex;
+align-items: center;
+}
+
+.search-container {
+display: flex;
+align-items: center;
+background: #0d0d0d;
+border: 1px solid #d4af37;
+border-radius: 30px;
+padding: 6px 14px;
+gap: 8px;
+transition: all 0.4s ease;
+width: 180px;
+}
+
+.search-container:focus-within {
+border-color: #f0d060;
+box-shadow: 0 0 12px rgba(212,175,55,0.3);
+width: 220px;
+}
+
+.search-icon {
+color: #d4af37;
+font-size: 14px;
+flex-shrink: 0;
+}
+
+#searchInput {
+background: transparent;
+border: none;
+outline: none;
+color: #d4af37;
+font-family: 'Cormorant Garamond', serif;
+font-size: 14px;
+width: 100%;
+letter-spacing: 1px;
+}
+
+#searchInput::placeholder {
+color: #5a4a1a;
+font-style: italic;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:30px;
+}
+
+.card{
+background:#111;
+border-radius:10px;
+overflow:hidden;
+text-align:center;
+box-shadow:0px 0px 15px rgba(0,0,0,0.6);
+transition: all 0.4s ease;
+border:1px solid #d4af37;
+position:relative;
+text-decoration: none;
+display: block;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0px 10px 30px rgba(212,175,55,0.5);
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+transition:0.5s ease;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.card::after{
+content:"";
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:60%;
+background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+.card h3{
+padding:12px;
+color:#ffffff;
+font-weight: 600;
+letter-spacing: 2px;
+font-family: 'Cinzel', serif;
+font-size: 13px;
+text-decoration: none;
+position: relative;
+z-index: 1;
+}
+
+.hidden-card {
+display: none !important;
+}
+
+.inventory-section {
+padding-top: 42px;
+}
+
+.inventory-empty {
+font-family: 'Cormorant Garamond', serif;
+font-size: 18px;
+line-height: 1.8;
+color: #c8a84b;
+padding: 0 30px 30px;
+}
+
+.inventory-card {
+cursor: pointer;
+}
+
+.inventory-card img {
+display: none;
+}
+
+.inventory-card::after {
+height: 100%;
+background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.68));
+}
+
+.inventory-card h3 {
+line-height: 1.5;
+padding: 48px 18px;
+min-height: 110px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+section{
+padding:50px;
+border-top:1px solid #d4af37;
+background:#0a0a0a;
+}
+
+section h2 {
+font-family: 'Cinzel Decorative', serif;
+font-size: 22px;
+letter-spacing: 4px;
+color: #d4af37;
+margin-bottom: 20px;
+}
+
+section p, section li {
+font-family: 'Cormorant Garamond', serif;
+font-size: 17px;
+line-height: 1.8;
+color: #c8a84b;
+}
+
+section ul {
+padding-left: 20px;
+}
+
+section ul li {
+margin-bottom: 10px;
+}
+
+section ul li strong {
+color: #d4af37;
+font-weight: 600;
+}
+
+.assistance-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 16px;
+margin-top: 20px;
+}
+
+.brand-link {
+display: flex;
+align-items: center;
+gap: 14px;
+background: #111;
+border: 1px solid #d4af37;
+border-radius: 8px;
+padding: 14px 18px;
+text-decoration: none;
+color: #d4af37;
+font-family: 'Cinzel', serif;
+font-size: 13px;
+letter-spacing: 1.5px;
+transition: all 0.4s ease;
+}
+
+.brand-link:hover {
+background: #1a1500;
+box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+transform: translateY(-3px);
+color: #f0d060;
+letter-spacing: 2.5px;
+}
+
+.brand-dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: #d4af37;
+flex-shrink: 0;
+}
+
+footer{
+background:#000;
+text-align:center;
+padding:15px;
+margin-top:20px;
+color:#d4af37;
+border-top:1px solid #d4af37;
+font-family: 'Cinzel', serif;
+font-size: 12px;
+letter-spacing: 3px;
+}
+
+/* SILVER THEME */
+body.silver {
+  color: #c0c0c0;
+}
+body.silver header,
+body.silver nav,
+body.silver footer {
+  border-color: #c0c0c0;
+}
+body.silver .card,
+body.silver .brand-link {
+  border-color: #c0c0c0;
+}
+body.silver nav a,
+body.silver .card h3,
+body.silver section h2,
+body.silver footer {
+  color: #c0c0c0;
+}
+body.silver .header-title {
+  color: #c0c0c0;
+  text-shadow: 0 0 40px rgba(192,192,192,0.3);
+}
+body.silver .card:hover {
+  box-shadow: 0px 10px 30px rgba(192,192,192,0.5);
+}
+body.silver .search-container {
+  border-color: #c0c0c0;
+}
+body.silver #searchInput,
+body.silver .search-icon {
+  color: #c0c0c0;
+}
+
+/* ROSE GOLD THEME */
+body.rosegold {
+  color: #b76e79;
+}
+body.rosegold header,
+body.rosegold nav,
+body.rosegold footer {
+  border-color: #b76e79;
+}
+body.rosegold .card,
+body.rosegold .brand-link {
+  border-color: #b76e79;
+}
+body.rosegold nav a,
+body.rosegold .card h3,
+body.rosegold section h2,
+body.rosegold footer {
+  color: #b76e79;
+}
+body.rosegold .header-title {
+  color: #b76e79;
+  text-shadow: 0 0 40px rgba(183,110,121,0.3);
+}
+body.rosegold .card:hover {
+  box-shadow: 0px 10px 30px rgba(183,110,121,0.5);
+}
+body.rosegold .search-container {
+  border-color: #b76e79;
+}
+body.rosegold #searchInput,
+body.rosegold .search-icon {
+  color: #b76e79;
+}
+
+/* ANIMATION OFF */
+body.no-anim .card {
+  transition: none !important;
+}
+body.no-anim .card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+body.no-anim .card img {
+  transition: none !important;
+}
+body.no-anim .card:hover img {
+  transform: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-emblem">&#10022; &nbsp; Est. in Excellence &nbsp; &#10022;</div>
+  <div class="header-title">VELOX NOIR</div>
+  <div class="header-subtitle">Where Legends Are Driven</div>
+  <div class="header-rule"></div>
+</header>
+
+<nav>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#inventory">Inventory</a>
+    <a href="#help">Help</a>
+    <a href="#settings">Settings</a>
+    <a href="#assist">Assistance</a>
+  </div>
+  <div class="nav-search-wrap">
+    <div class="search-container">
+      <span class="search-icon">&#9906;</span>
+      <input type="text" id="searchInput" placeholder="Search brands…" oninput="filterCards(this.value)" />
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="carGrid">
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\ROLLS ROYCE\ROLLS.html" class="card" data-name="rolls royce">
+<img src="ROLLS-ROYCE.png">
+<h3>Rolls Royce</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\BUGATTI\BUGGATI.html" class="card" data-name="bugatti">
+<img src="BUGATTI.png">
+<h3>Bugatti</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\LAMBO\LAMBORGHINI.html" class="card" data-name="lamborghini">
+<img src="LAMBO.png">
+<h3>Lamborghini</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\FERRARI\FERRARI.html" class="card" data-name="ferrari">
+<img src="FERRARI.png">
+<h3>Ferrari</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\BENTLY\BENTLY.html" class="card" data-name="bentley">
+<img src="BENTLY.png">
+<h3>Bentley</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\MCLAREN\MCLAREN.html" class="card" data-name="mclaren">
+<img src="MCLAREN.png">
+<h3>McLaren</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\ASTON\ASTON MARTIN.html" class="card" data-name="aston martin">
+<img src="ASTON.png">
+<h3>Aston Martin</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\MAYBACH\MAYBACH.html" class="card" data-name="mercedes maybach maybach">
+<img src="MAYBACH.png">
+<h3>Mercedes Maybach</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\PAGANI\PAGANI.html" class="card" data-name="pagani">
+<img src="PAGANI.png">
+<h3>Pagani</h3>
+</a>
+
+<a href="C:\Users\evbgo\OneDrive\Desktop\CAPSTONE\KOENIGSEGG\KOENIGSEGG.html" class="card" data-name="koenigsegg">
+<img src="KOENIGSEGG.png">
+<h3>Koenigsegg</h3>
+</a>
+
+</div>
+
+<section id="inventory" class="inventory-section">
+<h2>Inventory</h2>
+<p class="inventory-empty" id="inventoryEmpty">No cars have been checked out yet. Complete a checkout from any brand page and your reserved car will appear here.</p>
+<div class="container" id="inventoryGrid"></div>
+</section>
+
+
+<section id="help">
+<h2>Help &amp; Guide</h2>
+<ul>
+  <li><strong>Browsing Brands:</strong> The main grid on the homepage displays all ten luxury car brands. Simply hover over any brand card to see a zoom animation, then click on it to enter that brand's dedicated page.</li>
+  <li><strong>Search Bar:</strong> Use the gold search bar in the top-right of the navigation to filter brands by name. As you type, only matching brand cards will be shown — all others disappear. Clear the search to restore all cards.</li>
+  <li><strong>Navigation Links:</strong> The top navigation bar has four links — <em>Home</em> takes you back to the top, <em>Help</em> scrolls to this section, <em>Settings</em> takes you to preferences, and <em>Assistance</em> gives you direct official links to every brand.</li>
+  <li><strong>Do NOT refresh mid-browsing</strong> — if you are deep inside a brand's page, use your browser's back button to return to this main page safely.</li>
+  <li><strong>Image not loading?</strong> If a car image shows as broken, the image file may be missing from the project folder. Make sure all <em>.png</em> image files are placed in the same directory as this HTML file.</li>
+  <li><strong>Clicking brand cards:</strong> Each card is fully clickable — you can click anywhere on the card (image or text) to open that brand's page.</li>
+  <li><strong>Smooth scrolling:</strong> All navigation links scroll smoothly to their sections. You can also manually scroll down to reach Help, Settings, and Assistance.</li>
+</ul>
+</section>
+
+<section id="settings">
+  <h2>Settings</h2>
+
+  <p style="margin-bottom: 24px;">Personalise your experience below.</p>
+
+  <div style="margin-bottom: 36px;">
+    <p style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; color:#d4af37; margin-bottom:14px;">METAL THEME</p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <button onclick="setTheme('gold')"   style="background:#111; border:1px solid #d4af37; color:#d4af37; padding:10px 24px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; border-radius:30px; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='#1a1500'" onmouseout="this.style.background='#111'">&#9670; GOLD</button>
+      <button onclick="setTheme('silver')" style="background:#111; border:1px solid #c0c0c0; color:#c0c0c0; padding:10px 24px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; border-radius:30px; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='#151515'" onmouseout="this.style.background='#111'">&#9670; SILVER</button>
+      <button onclick="setTheme('rosegold')" style="background:#111; border:1px solid #b76e79; color:#b76e79; padding:10px 24px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; border-radius:30px; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='#150f10'" onmouseout="this.style.background='#111'">&#9670; ROSE GOLD</button>
+    </div>
+  </div>
+
+  <div>
+    <p style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; color:#d4af37; margin-bottom:14px;">CARD ANIMATIONS</p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <button onclick="setAnim(true)"  style="background:#111; border:1px solid #d4af37; color:#d4af37; padding:10px 24px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; border-radius:30px; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='#1a1500'" onmouseout="this.style.background='#111'">&#9670; ON</button>
+      <button onclick="setAnim(false)" style="background:#111; border:1px solid #d4af37; color:#d4af37; padding:10px 24px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; border-radius:30px; cursor:pointer; transition:all 0.3s ease;" onmouseover="this.style.background='#1a1500'" onmouseout="this.style.background='#111'">&#9670; OFF</button>
+    </div>
+  </div>
+</section>
+
+<section id="assist">
+<h2>Official Brand Links</h2>
+<p>Visit the official international websites of each luxury marque featured in this dealership.</p>
+<div class="assistance-grid">
+  <a class="brand-link" href="https://www.rolls-roycemotorcars.com" target="_blank"><span class="brand-dot"></span>Rolls-Royce Motor Cars</a>
+  <a class="brand-link" href="https://www.bugatti.com" target="_blank"><span class="brand-dot"></span>Bugatti Automobiles</a>
+  <a class="brand-link" href="https://www.lamborghini.com" target="_blank"><span class="brand-dot"></span>Automobili Lamborghini</a>
+  <a class="brand-link" href="https://www.ferrari.com" target="_blank"><span class="brand-dot"></span>Ferrari S.p.A.</a>
+  <a class="brand-link" href="https://www.bentleymotors.com" target="_blank"><span class="brand-dot"></span>Bentley Motors</a>
+  <a class="brand-link" href="https://www.mclaren.com" target="_blank"><span class="brand-dot"></span>McLaren Automotive</a>
+  <a class="brand-link" href="https://www.astonmartin.com" target="_blank"><span class="brand-dot"></span>Aston Martin Lagonda</a>
+  <a class="brand-link" href="https://www.mercedes-benz.com/en/maybach/" target="_blank"><span class="brand-dot"></span>Mercedes-Maybach</a>
+  <a class="brand-link" href="https://www.pagani.com" target="_blank"><span class="brand-dot"></span>Pagani Automobili</a>
+  <a class="brand-link" href="https://www.koenigsegg.com" target="_blank"><span class="brand-dot"></span>Koenigsegg Automotive</a>
+</div>
+</section>
+
+
+<footer>
+&copy; Lohith's Emporium &nbsp;&#10022;&nbsp; All Rights Reserved
+</footer>
+
+<script>
+function filterCards(query) {
+  const q = query.trim().toLowerCase();
+  const cards = document.querySelectorAll('#carGrid .card');
+  cards.forEach(card => {
+    const name = card.getAttribute('data-name') || '';
+    if (q === '' || name.includes(q)) {
+      card.classList.remove('hidden-card');
+    } else {
+      card.classList.add('hidden-card');
+    }
+  });
+}
+
+const inventoryStorageKey = 'veloxNoirInventory';
+const inventoryNavigation = performance.getEntriesByType('navigation')[0];
+
+if (inventoryNavigation && inventoryNavigation.type === 'reload') {
+  sessionStorage.removeItem(inventoryStorageKey);
+}
+
+function readInventory() {
+  try {
+    const raw = sessionStorage.getItem(inventoryStorageKey);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function renderInventory() {
+  const inventoryGrid = document.getElementById('inventoryGrid');
+  const inventoryEmpty = document.getElementById('inventoryEmpty');
+  const inventory = readInventory();
+
+  inventoryGrid.innerHTML = '';
+  inventoryEmpty.style.display = inventory.length ? 'none' : 'block';
+
+  inventory.forEach((car) => {
+    const card = document.createElement(car.page ? 'a' : 'div');
+    card.className = 'card inventory-card';
+    card.setAttribute('data-name', `${car.brand || ''} ${car.name || ''}`.trim().toLowerCase());
+
+    if (car.page) {
+      card.href = car.page;
+    }
+
+    const image = document.createElement('img');
+    image.src = car.image || '';
+    image.alt = car.name || 'Inventory car';
+
+    const title = document.createElement('h3');
+    title.textContent = car.brand ? `${car.brand} • ${car.name}` : (car.name || 'Reserved Car');
+
+    card.appendChild(image);
+    card.appendChild(title);
+    inventoryGrid.appendChild(card);
+  });
+}
+
+renderInventory();
+</script>
+<script>
+  function setTheme(theme) {
+  document.body.classList.remove('silver', 'rosegold');
+  if (theme !== 'gold') document.body.classList.add(theme);
+}
+
+function setAnim(on) {
+  document.body.classList.toggle('no-anim', !on);
+}
+</script>
+
+</body>
+</html>
